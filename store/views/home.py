@@ -12,7 +12,8 @@ class Index(View):
         cart = request.session.get('cart')
         if cart:
             quantity = cart.get(product)
-            if quantity<=1:
+            # print(quantity)
+            if quantity:
                 if remove:
                     if quantity<=1:
                         cart.pop(product)
@@ -26,7 +27,7 @@ class Index(View):
             cart = {}
             cart[product] = 1
         request.session['cart'] = cart
-        print('cart:',request.session['cart'])
+        # print('cart:',request.session['cart'])
         return redirect('homepage')
 
     def get(self, request):
@@ -46,7 +47,7 @@ class Index(View):
         data = {}
         data['products'] = products
         data['categories'] = categories
-        print('you are', request.session.get('email'))
+        # print('you are', request.session.get('email'))
         return render(request,'index.html', data)
 
 
